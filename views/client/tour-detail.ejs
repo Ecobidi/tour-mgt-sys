@@ -1,0 +1,70 @@
+<%- include ('../partials/client-top') %>
+<style>
+  .row {
+    padding: 2em;
+    box-shadow: 0px 0px 10px -4px #000;
+    margin-bottom: 2em;
+  }
+</style>
+
+<div class="jumbotron d-flex justify-content-center align-items-center md-banner text-white">
+  <h3 class="title">TMS - Tour Details</h3>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <img src='<%= tour.tour_featured_image || "/images/md-banner.jpg" %>' class="img-responsive" alt="">
+      <div class="mt-3">
+        <p>Grand Total</p>
+        <h3>NGN <%= tour.tour_price %></h3>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <h2><%= tour.tour_name %></h2>
+      <p class="dow">#TOUR-<%= tour.serial_number %></p>
+      <p><b>Package Type :</b> <%= tour.tour_type %></p>
+      <p><b>Location :</b> <%= tour.tour_location %></p>
+      <p><b>Features</b> <%= tour.tour_features %></p>
+      <form action="/book-tour" method="POST">
+        <input type="hidden" name="tour_package_id" value='<%= tour._id %>'>
+        <div class="d-flex flex-wrap">
+          <div class="mr-2 mb-2">
+            <label>From</label>
+            <input class="form-control" type="datetime-local" name="from_date" required style="border: none; border-bottom-width: 1px; width: fit-content !important;">
+          </div>
+          <div class="mr-2 mb-2">
+            <label>To</label>
+            <input class="form-control form-control-sm" type="datetime-local" name="to_date" required style="border: none; border-bottom-width: 1px; width: fit-content !important;">
+          </div>
+          <div class="mr-2 mb-2">
+            <label>Name</label>
+            <input required class="form-control form-control-sm w-100" name="customer_name" placeholder="Full Name" style="border: none; border-bottom-width: 1px;">
+          </div>
+          <div class="mr-2 mb-2">
+            <label>Email</label>
+            <input class="form-control form-control-sm" name="customer_email" placeholder="Contact Email" style="border: none; border-bottom-width: 1px; width: fit-content !important;">
+          </div>
+          <div class="mr-2 mb-2">
+            <label>Phone</label>
+            <input class="form-control form-control-sm" name="customer_phone" placeholder="Mobile Phone" style="border: none; border-bottom-width: 1px; width: fit-content !important;">
+          </div>
+          <div class="mr-2 mb-2">
+            <label>Comment</label>
+            <textarea class="form-control form-control-sm" name="comment" placeholder="Write your comment/request" style="border: none; border-bottom-width: 1px; width: fit-content !important;"></textarea>
+          </div>
+          <div class="w-100 my-2">
+            <input type="submit" class="btn btn-primary btn-sm" value="Book Tour">
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="clearfix"></div>
+    <div>
+      <h3>Tour Description</h3>
+      <p style="padding-top: 1%; width: 40%;"><%= tour.tour_description %> </p>	
+    </div>
+  </div>
+</div>
+
+<%- include ('../partials/client-bottom') %>

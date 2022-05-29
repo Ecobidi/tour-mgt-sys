@@ -1,0 +1,66 @@
+<%-include ("partials/top") %>
+<div class="row space">
+  <div class="col-12">
+    <div class="d-flex justify-content-between align-items-center border-bottom pb-2">
+      <h4 class="page-title">Update Tour Package</h4>
+    </div>
+  </div> 
+</div>
+
+<div class="row space">
+<div class="col-12">
+
+<form action='<%= "/admin/tour-packages/update/" + tour.serial_number %>' method="POST" enctype="multipart/form-data" class="card">
+  <input type="hidden" name="_id" value='<%= tour._id %>'>
+  <fieldset class="row card-body">
+    <div class="form-group col-md-4">
+      <label>Tour Name: <strong class="text-danger">*</strong></label>
+      <input required type="text" class="form-control" name="tour_name" value='<%= tour.tour_name %>' />
+    </div>
+    <div class="form-group col-md-4">
+      <label>Tour Type: <strong class="text-danger">*</strong></label>
+      <select required class="form-control" name="tour_type">
+        <option value="">-- select tour package type --</option>
+        <% packageTypes.forEach(type => { %>
+          <% if (type == tour.tour_type) { %>
+            <option selected><%= type %></option>
+          <% } else { %>
+            <option><%= type %></option>
+          <% } %>
+        <% }) %>
+      </select>
+    </div>
+    <div class="form-group col-md-4">
+      <label>Tour Location: <strong class="text-danger">*</strong></label>
+      <input required type="text" class="form-control" name="tour_location" value='<%= tour.tour_location %>' />
+    </div>
+    <div class="form-group col-md-4">
+      <label>Tour Price (NGN): <strong class="text-danger">*</strong></label>
+      <input required type="text" class="form-control" name="tour_price" value='<%= tour.tour_price %>' />
+    </div>
+    <div class="form-group col-md-4">
+      <label>Tour Features: <strong class="text-danger">*</strong></label>
+      <textarea class="form-control" name="tour_features"><%= tour.tour_features %></textarea>
+    </div>
+    <div class="form-group col-md-4">
+      <label>Tour Description: <strong class="text-danger">*</strong></label>
+      <textarea class="form-control" name="tour_description"><%= tour.tour_description %></textarea>
+    </div>
+    <div class="col-md-4">
+      <p>Existing Featured Image</p>
+      <img src='<%= tour.tour_featured_image || "/images/md-banner.jpg" %>' style="height: 100px; width: 100%;" alt="tour featured image">
+    </div>
+    <div class="form-group col-md-4">
+      <label>Upload New Featured Image: <strong class="text-info">*</strong></label>
+      <input type="file" class="form-control" name="tour_featured_image" accept=".jpg,.png" />
+    </div>
+  </fieldset>
+  
+  <div class="form-group mt-4">
+    <button class="btn btn-primary form-control" type="submit">Submit</button>
+  </div>
+</form>
+
+<script>
+
+<%-include ("partials/bottom") %>
